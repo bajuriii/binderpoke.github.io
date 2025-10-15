@@ -4,29 +4,92 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const flags = [
     { name: "Pokemon TCG ID", image: "https://flagcdn.com/w320/id.png", region: "Indonesia" },
-    { name: "Pokemon TCG US/Global", image: "https://flagcdn.com/w320/us.png", region: "Global" },
-    { name: "Pokemon TCG Japan", image: "https://flagcdn.com/w320/jp.png", region: "Japan" },
   ];
 
   const mainSeries = {
     Indonesia: [
-      { name: "Matahari & Bulan", subs: ["AS1A - Matahari", "AS2B - Bulan", "AS3A - Legenda"] },
-      { name: "Pedang dan Perisai", subs: ["S1A - Awal", "S2B - Perisai Baja"] },
-      { name: "Pokémon GO", subs: ["GO1", "GO2"] },
-      { name: "Scarlet & Violet", subs: ["SV1A - Awal Baru", "SV2B - Paradox Rift"] }
+      {
+        name: "Matahari & Bulan",
+        subs: [
+          "AS1a - Hantaman Pertama (Set A)",
+          "AS1b - Hantaman Pertama (Set B)",
+          "AS2a - Kebangkitan Legenda (Set A)",
+          "AS2b - Kebangkitan Legenda (Set B)",
+          "AS3a - Bayangan Tersembunyi (Set A)",
+          "AS3b - Bayangan Tersembunyi (Set B)",
+          "AS4a - Penguasa Langit (Set A)",
+          "AS4b - Penguasa Langit (Set B)",
+          "AC3a - Koleksi Tag Team (Set A)",
+          "AC3b - Koleksi Tag Team (Set B)"
+        ]
+      },
+      {
+        name: "Pedang dan Perisai",
+        subs: [
+          "S1 - Pedang dan Perisai (Set A)",
+          "SC3a - VMAX Berkilau (Set A)",
+          "SC3b - VMAX Berkilau (Set B)",
+          "S5R - Master Serangan Beruntun",
+          "S5L1 - Master Serangan Tunggal",
+          "S6H - Dua Pilar Petarung",
+          "S6K - Astral Gelap Gulita",
+          "S6S - Ganjur Salju Perak",
+          "S6a - Para Eevee Pahlawan",
+          "S7R - Arus Langit Biru",
+          "S7L - Pencakar Langit Sempurna",
+          "S8P - Peringatan Perayaan 25 Tahun",
+          "S8F - Teknik Fusion",
+          "S8B - VMAX Klimaks",
+          "S9 - Star Birth",
+          "S10a - Pertarungan Daerah",
+          "S10D - Pengamat Waktu",
+          "S10P - Penyulap Ruang",
+          "S10a - Fantom Kegelapan",
+          "S11a - Neraka Sirna",
+          "S11a - Arkana Memuncak",
+          "S17 - Pemicu Paradigma",
+          "S12a - VSTAR Semesta"
+        ]
+      },
+      {
+        name: "Pokémon GO",
+        subs: ["PGO1 - Pokémon GO"]
+      },
+      {
+        name: "Scarlet & Violet",
+        subs: [
+          "SV1S - Scarlet EX",
+          "SV1V - Violet EX",
+          "SV1A - Hantaman Triplet",
+          "SV2D - Letusan Tanah",
+          "SV2P - Mara Bahaya Salju",
+          "SV2A - Kartu Pokémon 151",
+          "SV3S - Kilau Hitam",
+          "SV4S - Pertemuan Paradoks",
+          "SV4A - Harta Berkilau ex",
+          "SV5S - Paradoks Andalan",
+          "SV6S - Topeng Transfigurasi",
+          "SV7S - Bimbingan Rasi",
+          "SV8S - Kilat Rasi",
+          "SV9S - Festival Terastal EX",
+          "SV9S - Ikatan Takdir",
+          "SV10S - Kehadiran Juara",
+          "SV11S - Hitam & Putih",
+          "MA1 - Evolusi Mega"
+        ]
+      }
     ]
   };
 
-  // Dummy data sementara (nanti bisa diganti JSON)
   const cardDatabase = {
-    "AS1A - Matahari": [
+    "AS1a - Hantaman Pertama (Set A)": [
       { id: "001", name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png" },
       { id: "002", name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png" },
       { id: "003", name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png" }
     ],
-    "AS2B - Bulan": [
-      { id: "001", name: "Bulbasaur", image: "https://images.pokemontcg.io/base1/44.png" },
-      { id: "002", name: "Ivysaur", image: "https://images.pokemontcg.io/base1/30.png" }
+    "PGO1 - Pokémon GO": [
+      { id: "001", name: "Mewtwo V", image: "https://images.pokemontcg.io/pgo/72.png" },
+      { id: "002", name: "Snorlax", image: "https://images.pokemontcg.io/pgo/55.png" }
     ]
   };
 
