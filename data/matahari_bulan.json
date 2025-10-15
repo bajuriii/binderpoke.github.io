@@ -1,41 +1,6 @@
-{
-  "seri": "MATAHARI & BULAN",
-  "sub_seri": [
-    {
-      "nama": "Hantaman Pertama (Set A)",
-      "kode": "AS1a"
-    },
-    {
-      "nama": "Hantaman Pertama (Set B)",
-      "kode": "AS1b"
-    },
-    {
-      "nama": "Kebangkitan Legenda (Set A)",
-      "kode": "AS2a"
-    },
-    {
-      "nama": "Kebangkitan Legenda (Set B)",
-      "kode": "AS2b"
-    },
-    {
-      "nama": "Bayangan Tersembunyi (Set A)",
-      "kode": "AS3a"
-    },
-    {
-      "nama": "Bayangan Tersembunyi (Set B)",
-      "kode": "AS3b"
-    },
-    {
-      "nama": "Penguasa Langit (Set A)",
-      "kode": "AS4a"
-    },
-    {
-      "nama": "Penguasa Langit (Set B)",
-      "kode": "AS4b"
-    },
-    {
-      "nama": "Koleksi Tag Team (Set A)",
-      "kode": "AC3a"
-    },
-    {
-      "nama": "Koleksi Tag Team (Set B)",
+[
+  { "seri": "Matahari & Bulan", "file": "matahari_bulan_hybrid.json" },
+  { "seri": "Pedang dan Perisai", "file": "pedang_perisai_hybrid.json" },
+  { "seri": "Pokémon GO", "file": "pokemon_go_hybrid.json" },
+  { "seri": "Scarlet & Violet", "file": "scarlet_violet_hybrid.json" }
+]
