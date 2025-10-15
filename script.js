@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🌍 Bendera Wilayah
   const flags = [
-{id:"001/171",name:"Bulbasaur",image: "https://asia.pokemon-card.com/id/card-img/id00001344.png" }
-{id:"002/171",name:"Ivysaur",image: "https://asia.pokemon-card.com/id/card-img/id00001345.png" }
-{id:"003/171",name:"Venusaur",image: "https://asia.pokemon-card.com/id/card-img/id00001346.png" }
+{id:"001/171",name:"Bulbasaur",image: "https://asia.pokemon-card.com/id/card-img/id00001344.png" },
+{id:"002/171",name:"Ivysaur",image: "https://asia.pokemon-card.com/id/card-img/id00001345.png" },
+{id:"003/171",name:"Venusaur",image: "https://asia.pokemon-card.com/id/card-img/id00001346.png" },
 {id:"004/171",name:"Caterpie",image: "https://asia.pokemon-card.com/id/card-img/id00001347.png" },
 {id:"005/171",name:"Metapod",image: "https://asia.pokemon-card.com/id/card-img/id00001348.png" },
 {id:"006/171",name:"Butterfree",image: "https://asia.pokemon-card.com/id/card-img/id00001349.png" },
@@ -297,4 +297,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFlags();
 });
+
 
