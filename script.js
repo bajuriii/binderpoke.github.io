@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cards = [
-    { name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png", type: "Listrik" },
-    { name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png", type: "Api" },
-    { name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png", type: "Air" }
+    { name: "Pokemon TCG ID", image: "https://flagcdn.com/w320/id.png", type: "indonesia" },
+    { name: "Pokemon TCG US/Global", image: "https://flagcdn.com/w320/us.png", type: "US/Global" },
+    { name: "Pokemon TCG Japan", image: "https://flagcdn.com/w320/jp.png", type: "Japan" }
   ];
 
   const grid = document.getElementById("card-grid");
@@ -30,3 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCards(filtered);
   });
 });
+
