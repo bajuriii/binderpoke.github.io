@@ -1,61 +1,93 @@
-/* Gaya umum untuk grid */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background: #161b22;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #ffcc00;
+}
+
+#search {
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
 #card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 30px;
+  justify-items: center;
 }
 
-/* Kartu umum */
 .card {
-  background: white;
-  border-radius: 16px;
-  padding: 10px;
+  background: #161b22;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  max-width: 200px;
   text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
 }
+
 .card:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
-/* Gambar bendera & kartu */
 .card img {
   width: 100%;
-  max-width: 140px;   /* batas maksimum biar nggak kegedean */
+  max-width: 120px;
   height: auto;
-  margin: 0 auto 10px;
-  border-radius: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
   object-fit: contain;
 }
 
-/* Judul kartu / seri */
 .card h3 {
-  font-size: 1rem;
-  margin: 8px 0;
+  margin: 8px 0 4px;
+  font-size: 16px;
+  color: #58a6ff;
 }
 
-/* Checkbox bagian bawah */
-.card label {
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
+.card p {
+  color: #8b949e;
+  font-size: 14px;
 }
 
-/* Tombol kembali */
 .back-btn {
-  background-color: #ffcb05;
-  color: #2a75bb;
+  background: #ffcc00;
+  color: #000;
   font-weight: bold;
   border: none;
   border-radius: 10px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   cursor: pointer;
   margin-bottom: 20px;
 }
+
 .back-btn:hover {
-  background-color: #f6b800;
+  background: #e6b800;
+}
+
+footer {
+  background: #161b22;
+  padding: 15px;
+  font-size: 14px;
+  color: #8b949e;
 }
