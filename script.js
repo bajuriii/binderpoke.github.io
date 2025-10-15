@@ -2,10 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("card-grid");
   const search = document.getElementById("search");
 
+  // 🌍 Bendera Wilayah
   const flags = [
     { name: "Pokemon TCG ID", image: "https://flagcdn.com/w320/id.png", region: "Indonesia" },
+    { name: "Pokemon TCG Global", image: "https://flagcdn.com/w320/us.png", region: "Global" },
+    { name: "Pokemon TCG Japan", image: "https://flagcdn.com/w320/jp.png", region: "Japan" },
   ];
 
+  // ⚡ Seri Utama per Wilayah
   const mainSeries = {
     Indonesia: [
       {
@@ -27,75 +31,44 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Pedang dan Perisai",
         subs: [
           "S1 - Pedang dan Perisai (Set A)",
+          "S1 - Pedang dan Perisai (Set B)",
           "SC3a - VMAX Berkilau (Set A)",
-          "SC3b - VMAX Berkilau (Set B)",
-          "S5R - Master Serangan Beruntun",
-          "S5L1 - Master Serangan Tunggal",
-          "S6H - Dua Pilar Petarung",
-          "S6K - Astral Gelap Gulita",
-          "S6S - Ganjur Salju Perak",
-          "S6a - Para Eevee Pahlawan",
-          "S7R - Arus Langit Biru",
-          "S7L - Pencakar Langit Sempurna",
-          "S8P - Peringatan Perayaan 25 Tahun",
-          "S8F - Teknik Fusion",
-          "S8B - VMAX Klimaks",
-          "S9 - Star Birth",
-          "S10a - Pertarungan Daerah",
-          "S10D - Pengamat Waktu",
-          "S10P - Penyulap Ruang",
-          "S10a - Fantom Kegelapan",
-          "S11a - Neraka Sirna",
-          "S11a - Arkana Memuncak",
-          "S17 - Pemicu Paradigma",
-          "S12a - VSTAR Semesta"
+          "SC3b - VMAX Berkilau (Set B)"
         ]
       },
       {
         name: "Pokémon GO",
-        subs: ["PGO1 - Pokémon GO"]
+        subs: ["GO1 - Pokémon GO"]
       },
       {
         name: "Scarlet & Violet",
         subs: [
           "SV1S - Scarlet EX",
           "SV1V - Violet EX",
-          "SV1A - Hantaman Triplet",
-          "SV2D - Letusan Tanah",
-          "SV2P - Mara Bahaya Salju",
-          "SV2A - Kartu Pokémon 151",
-          "SV3S - Kilau Hitam",
-          "SV4S - Pertemuan Paradoks",
-          "SV4A - Harta Berkilau ex",
-          "SV5S - Paradoks Andalan",
-          "SV6S - Topeng Transfigurasi",
-          "SV7S - Bimbingan Rasi",
-          "SV8S - Kilat Rasi",
-          "SV9S - Festival Terastal EX",
-          "SV9S - Ikatan Takdir",
-          "SV10S - Kehadiran Juara",
-          "SV11S - Hitam & Putih",
-          "MA1 - Evolusi Mega"
+          "SV2A - Hantaman Triplet",
+          "SV2D - Letusan Tanah"
         ]
       }
     ]
   };
 
+  // 🧩 Data kartu contoh (bisa diisi nanti dengan JSON)
   const cardDatabase = {
     "AS1a - Hantaman Pertama (Set A)": [
       { id: "001", name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png" },
       { id: "002", name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png" },
       { id: "003", name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png" }
-    ],
-    "PGO1 - Pokémon GO": [
-      { id: "001", name: "Mewtwo V", image: "https://images.pokemontcg.io/pgo/72.png" },
-      { id: "002", name: "Snorlax", image: "https://images.pokemontcg.io/pgo/55.png" }
     ]
   };
 
+  // ========== RENDER FUNCTIONS ==========
   function renderFlags() {
     grid.innerHTML = "";
     search.style.display = "none";
+    const title = document.createElement("h2");
+    title.textContent = "🌎 Pilih Wilayah Pokémon TCG";
+    grid.appendChild(title);
+
     flags.forEach(flag => {
       const div = document.createElement("div");
       div.className = "card";
@@ -142,6 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("back-btn").addEventListener("click", () => renderSubSeries(region, serieName));
 
     const cards = cardDatabase[subSerie] || [];
+    if (cards.length === 0) {
+      const msg = document.createElement("p");
+      msg.textContent = "Belum ada data kartu untuk seri ini.";
+      grid.appendChild(msg);
+      return;
+    }
+
     cards.forEach(card => {
       const div = document.createElement("div");
       div.className = "card";
