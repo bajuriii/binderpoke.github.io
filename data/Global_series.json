@@ -1,0 +1,6 @@
+[
+  { "seri": "Sun & Moon", "file": "sun_moon_hybrid.json" },
+  { "seri": "Sword & Shield", "file": "sword_shield_hybrid.json" },
+  { "seri": "Pokémon GO", "file": "pokemon_go_global_hybrid.json" },
+  { "seri": "Scarlet & Violet", "file": "scarlet_violet_global_hybrid.json" }
+]
