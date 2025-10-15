@@ -1,116 +1,64 @@
-// Simple static data. Tambah kartu di sini.
-const cards = [
-  {
-    id: "001/171",
-    name: "Karrablast",
-    series: "AS1a",
-    type: "Grass",
-    rarity: "C",
-    image: "https://raw.githubusercontent.com/username/binderpokemon.github.io/main/images/karrablast.jpg"
-  },
-  {
-    id: "002/171",
-    name: "Alolan Marowak",
-    series: "AS1a",
-    type: "Fire",
-    rarity: "C",
-    image: "https://raw.githubusercontent.com/username/binderpokemon.github.io/main/images/alolan_marowak.jpg"
-  },
-  {
-    id: "003/171",
-    name: "Entei GX",
-    series: "AS1a",
-    type: "Fire",
-    rarity: "RR",
-    image: "https://raw.githubusercontent.com/username/binderpokemon.github.io/main/images/entei_gx.jpg"
-  }
-  // Tambah data kartu lain di sini
-];
-
-const grid = document.getElementById('grid');
-const search = document.getElementById('search');
-const filterType = document.getElementById('filterType');
-const filterRarity = document.getElementById('filterRarity');
-
-function unique(arr, key){
-  return Array.from(new Set(arr.map(x=>x[key]))).filter(Boolean).sort();
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-// populate filters
-function initFilters(){
-  const types = unique(cards, 'type');
-  types.forEach(t=>{
-    const o = document.createElement('option');
-    o.value = t; o.textContent = t; filterType.appendChild(o);
-  });
-  const rarities = unique(cards, 'rarity');
-  rarities.forEach(r=>{
-    const o = document.createElement('option');
-    o.value = r; o.textContent = r; filterRarity.appendChild(o);
-  });
+header {
+  background: #161b22;
+  padding: 20px;
+  position: sticky;
+  top: 0;
 }
 
-// render card grid
-function render(list){
-  grid.innerHTML = '';
-  if(list.length === 0){
-    grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center">Tidak ada kartu</p>';
-    return;
-  }
-  list.forEach(c=>{
-    const el = document.createElement('div');
-    el.className = 'card';
-    el.innerHTML = `
-      <img src="${c.image}" alt="${c.name}" loading="lazy">
-      <div class="meta">
-        <div class="name">${c.name}</div>
-        <div class="sub">${c.series} · ${c.type} · ${c.rarity}</div>
-      </div>
-    `;
-    el.addEventListener('click', ()=> openDetail(c));
-    grid.appendChild(el);
-  });
+h1 {
+  margin-bottom: 10px;
+  color: #ffcc00;
 }
 
-// filtering logic
-function applyFilters(){
-  const q = search.value.trim().toLowerCase();
-  const type = filterType.value;
-  const rarity = filterRarity.value;
-  let result = cards.filter(c=>{
-    const matchQ = q === '' || (c.name + ' ' + c.series + ' ' + c.id).toLowerCase().includes(q);
-    const matchType = !type || c.type === type;
-    const matchRarity = !rarity || c.rarity === rarity;
-    return matchQ && matchType && matchRarity;
-  });
-  render(result);
+#search {
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
 }
 
-// detail popup
-const overlay = document.getElementById('overlay');
-const detailImage = document.getElementById('detailImage');
-const detailName = document.getElementById('detailName');
-const detailSeries = document.getElementById('detailSeries');
-const detailType = document.getElementById('detailType');
-const detailRarity = document.getElementById('detailRarity');
-const closeBtn = document.getElementById('closeDetail');
-
-function openDetail(card){
-  detailImage.src = card.image;
-  detailName.textContent = `${card.name} (${card.id})`;
-  detailSeries.textContent = card.series;
-  detailType.textContent = card.type;
-  detailRarity.textContent = card.rarity;
-  overlay.classList.remove('hidden');
+#card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 30px;
 }
-function closeDetail(){ overlay.classList.add('hidden'); }
-closeBtn.addEventListener('click', closeDetail);
-overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeDetail(); });
 
-search.addEventListener('input', applyFilters);
-filterType.addEventListener('change', applyFilters);
-filterRarity.addEventListener('change', applyFilters);
+.card {
+  background: #161b22;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
 
-// init
-initFilters();
-applyFilters();
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  margin: 10px 0 0;
+  color: #58a6ff;
+}
+
+.card p {
+  margin: 5px 0 15px;
+  font-size: 14px;
+  color: #8b949e;
+}
