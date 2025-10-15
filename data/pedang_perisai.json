@@ -1,0 +1,20 @@
+{
+  "seri": "Pedang dan Perisai",
+  "sub_seri": [
+    {
+      "nama": "Pedang & Perisai (Set A)",
+      "kode": "S1A",
+      "kartu": [
+        { "id": "101", "name": "Grookey", "image": "https://images.pokemontcg.io/swsh1/1.png" },
+        { "id": "102", "name": "Scorbunny", "image": "https://images.pokemontcg.io/swsh1/2.png" }
+      ]
+    },
+    {
+      "nama": "Pedang & Perisai (Set B)",
+      "kode": "S1B",
+      "kartu": [
+        { "id": "103", "name": "Sobble", "image": "https://images.pokemontcg.io/swsh1/3.png" }
+      ]
+    }
+  ]
+}
