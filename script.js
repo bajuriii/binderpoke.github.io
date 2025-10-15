@@ -10,7 +10,7 @@ async function renderCardList(region, serieName, subSerie) {
 
   try {
     // Fetch data JSON dari folder cards/
-    const res = await fetch(`data/cards/${subSerieKode}.json`);
+    const res = await fetch(`data/id/series/sub-series/cards/${subSerieKode}.json`);
     if (!res.ok) throw new Error("Gagal load JSON");
     const cards = await res.json();
 
@@ -53,3 +53,4 @@ async function renderCardList(region, serieName, subSerie) {
     grid.appendChild(msg);
   }
 }
+
