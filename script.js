@@ -2,114 +2,105 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("card-grid");
   const search = document.getElementById("search");
 
-  // LEVEL 1: Negara
-  const countries = [
-    { name: "Indonesia", flag: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg", region: "ID" },
-    { name: "US/Global", flag: "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg", region: "US" },
-    { name: "Japan", flag: "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg", region: "JP" }
+  const flags = [
+    { name: "Pokemon TCG ID", image: "https://flagcdn.com/w320/id.png", region: "Indonesia" },
+    { name: "Pokemon TCG US/Global", image: "https://flagcdn.com/w320/us.png", region: "Global" },
+    { name: "Pokemon TCG Japan", image: "https://flagcdn.com/w320/jp.png", region: "Japan" },
   ];
 
-  // LEVEL 2: Seri utama
   const mainSeries = {
-    ID: [
-      "MATAHARI & BULAN",
-      "PEDANG DAN PERISAI",
-      "POKEMON GO",
-      "SCARLET & VIOLET"
+    Indonesia: [
+      { name: "Matahari & Bulan", subs: ["AS1A - Matahari", "AS2B - Bulan", "AS3A - Legenda"] },
+      { name: "Pedang dan Perisai", subs: ["S1A - Awal", "S2B - Perisai Baja"] },
+      { name: "Pokémon GO", subs: ["GO1", "GO2"] },
+      { name: "Scarlet & Violet", subs: ["SV1A - Awal Baru", "SV2B - Paradox Rift"] }
     ],
-    US: ["Base Set", "Jungle", "Fossil", "Team Rocket"],
-    JP: ["SM1", "SM2", "S", "SV"]
-  };
-
-  // LEVEL 3: Sub-seri
-  const subSeries = {
-    "MATAHARI & BULAN": ["AS1a", "AS1b", "AS2a", "AS2b"],
-    "PEDANG DAN PERISAI": ["S1a", "S1b", "S2a", "S2b"],
-    "POKEMON GO": ["PGO"],
-    "SCARLET & VIOLET": ["SV1a", "SV1b", "SV2a", "SV2b"]
-  };
-
-  // LEVEL 4: Kartu per sub-seri
-  const cardsData = {
-    AS1a: [
-      { name: "Karrablast", image: "https://images.pokemontcg.io/sm1/1.png", type: "Grass" },
-      { name: "Alolan Marowak", image: "https://images.pokemontcg.io/sm1/12.png", type: "Fire" },
-      { name: "Entei GX", image: "https://images.pokemontcg.io/sm1/21.png", type: "Fire" },
-      { name: "Numel", image: "https://images.pokemontcg.io/sm1/24.png", type: "Fire" },
-      { name: "Shining Ho-Oh", image: "https://images.pokemontcg.io/sm1/30.png", type: "Shining" }
+    Global: [
+      { name: "Base Set", subs: ["Base Set", "Jungle", "Fossil"] },
+      { name: "Sword & Shield", subs: ["Base", "Vivid Voltage", "Evolving Skies"] },
+      { name: "Scarlet & Violet", subs: ["Base", "Obsidian Flames", "Temporal Forces"] },
+    ],
+    Japan: [
+      { name: "スカーレット&バイオレット", subs: ["SV1a トリプレットビート", "SV2a スノーハザード"] },
+      { name: "ソード&シールド", subs: ["S1H 拡張パック", "S2D 反逆クラッシュ"] }
     ]
   };
 
-  // Render UI
-  function renderCards(list, type = "country", parentKey = null) {
+  // 🔹 Halaman awal: bendera
+  function renderFlags() {
     grid.innerHTML = "";
-
-    list.forEach(item => {
+    search.style.display = "none";
+    flags.forEach(flag => {
       const div = document.createElement("div");
       div.className = "card";
-
-      if (type === "country") {
-        div.innerHTML = `
-          <img src="${item.flag}" alt="${item.name}">
-          <h3>${item.name}</h3>
-        `;
-        div.addEventListener("click", () => showMainSeries(item.region));
-      }
-
-      if (type === "main") {
-        div.innerHTML = `<h3>${item}</h3>`;
-        div.addEventListener("click", () => showSubSeries(item));
-      }
-
-      if (type === "sub") {
-        div.innerHTML = `<h3>${item}</h3><p>Klik untuk lihat kartu</p>`;
-        div.addEventListener("click", () => showCards(item));
-      }
-
-      if (type === "card") {
-        div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <p>${item.type}</p>
-        `;
-      }
-
+      div.innerHTML = `
+        <img src="${flag.image}" alt="${flag.name}">
+        <h3>${flag.name}</h3>
+        <p>${flag.region}</p>
+      `;
+      div.addEventListener("click", () => renderMainSeries(flag.region));
       grid.appendChild(div);
     });
   }
 
-  // Tampilkan seri utama
-  function showMainSeries(region) {
-    const list = mainSeries[region] || [];
-    renderCards(list, "main");
-  }
+  // 🔹 Seri utama
+  function renderMainSeries(region) {
+    grid.innerHTML = `
+      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
+    `;
+    document.getElementById("back-btn").addEventListener("click", renderFlags);
 
-  // Tampilkan sub-seri
-  function showSubSeries(seriesName) {
-    const list = subSeries[seriesName] || [];
-    renderCards(list, "sub");
-  }
-
-  // Tampilkan kartu per sub-seri
-  function showCards(subName) {
-    const list = cardsData[subName] || [];
-    if (list.length === 0) {
-      grid.innerHTML = `<p>Tidak ada data kartu untuk seri ${subName}.</p>`;
-    } else {
-      renderCards(list, "card");
-    }
-  }
-
-  // Render pertama
-  renderCards(countries, "country");
-
-  // Fitur pencarian
-  search.addEventListener("input", () => {
-    const value = search.value.toLowerCase();
-    const cards = Array.from(grid.querySelectorAll(".card"));
-    cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(value) ? "" : "none";
+    mainSeries[region].forEach(serie => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `<h3>${serie.name}</h3>`;
+      div.addEventListener("click", () => renderSubSeries(region, serie.name));
+      grid.appendChild(div);
     });
-  });
+  }
+
+  // 🔹 Sub-seri
+  function renderSubSeries(region, serieName) {
+    grid.innerHTML = `
+      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
+    `;
+    document.getElementById("back-btn").addEventListener("click", () => renderMainSeries(region));
+
+    const serie = mainSeries[region].find(s => s.name === serieName);
+    serie.subs.forEach(sub => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `<h3>${sub}</h3>`;
+      div.addEventListener("click", () => renderCardList(region, serieName, sub));
+      grid.appendChild(div);
+    });
+  }
+
+  // 🔹 Daftar kartu dalam sub-seri
+  function renderCardList(region, serieName, subSerie) {
+    grid.innerHTML = `
+      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
+    `;
+    document.getElementById("back-btn").addEventListener("click", () => renderSubSeries(region, serieName));
+
+    // ⚠️ Nanti ini bisa diganti ambil data dari JSON / API
+    const dummyCards = [
+      { name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png", type: "Listrik" },
+      { name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png", type: "Api" },
+      { name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png", type: "Air" }
+    ];
+
+    dummyCards.forEach(card => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <img src="${card.image}" alt="${card.name}">
+        <h3>${card.name}</h3>
+        <p>${card.type}</p>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  renderFlags(); // halaman awal
 });
