@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Binder Pokémon</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Binder Pokémon</h1>
+    <div class="controls">
+      <input id="search" placeholder="Cari nama / seri..." />
+      <select id="filterType">
+        <option value="">Semua Tipe</option>
+      </select>
+      <select id="filterRarity">
+        <option value="">Semua Kelangkaan</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section id="grid" class="grid"></section>
+  </main>
+
+  <!-- popup detail -->
+  <div id="overlay" class="overlay hidden">
+    <div class="card-detail">
+      <button id="closeDetail" class="close">✕</button>
+      <img id="detailImage" alt="card image" />
+      <div class="detail-info">
+        <h2 id="detailName"></h2>
+        <p><strong>Seri:</strong> <span id="detailSeries"></span></p>
+        <p><strong>Tipe:</strong> <span id="detailType"></span></p>
+        <p><strong>Kelangkaan:</strong> <span id="detailRarity"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
