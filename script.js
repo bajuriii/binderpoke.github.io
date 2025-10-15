@@ -14,19 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
       { name: "Pedang dan Perisai", subs: ["S1A - Awal", "S2B - Perisai Baja"] },
       { name: "Pokémon GO", subs: ["GO1", "GO2"] },
       { name: "Scarlet & Violet", subs: ["SV1A - Awal Baru", "SV2B - Paradox Rift"] }
-    ],
-    Global: [
-      { name: "Base Set", subs: ["Base Set", "Jungle", "Fossil"] },
-      { name: "Sword & Shield", subs: ["Base", "Vivid Voltage", "Evolving Skies"] },
-      { name: "Scarlet & Violet", subs: ["Base", "Obsidian Flames", "Temporal Forces"] },
-    ],
-    Japan: [
-      { name: "スカーレット&バイオレット", subs: ["SV1a トリプレットビート", "SV2a スノーハザード"] },
-      { name: "ソード&シールド", subs: ["S1H 拡張パック", "S2D 反逆クラッシュ"] }
     ]
   };
 
-  // 🔹 Halaman awal: bendera
+  // Dummy data sementara (nanti bisa diganti JSON)
+  const cardDatabase = {
+    "AS1A - Matahari": [
+      { id: "001", name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png" },
+      { id: "002", name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png" },
+      { id: "003", name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png" }
+    ],
+    "AS2B - Bulan": [
+      { id: "001", name: "Bulbasaur", image: "https://images.pokemontcg.io/base1/44.png" },
+      { id: "002", name: "Ivysaur", image: "https://images.pokemontcg.io/base1/30.png" }
+    ]
+  };
+
   function renderFlags() {
     grid.innerHTML = "";
     search.style.display = "none";
@@ -43,13 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔹 Seri utama
   function renderMainSeries(region) {
-    grid.innerHTML = `
-      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
-    `;
+    grid.innerHTML = `<button id="back-btn" class="back-btn">⬅️ Kembali</button>`;
     document.getElementById("back-btn").addEventListener("click", renderFlags);
-
     mainSeries[region].forEach(serie => {
       const div = document.createElement("div");
       div.className = "card";
@@ -59,13 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔹 Sub-seri
   function renderSubSeries(region, serieName) {
-    grid.innerHTML = `
-      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
-    `;
+    grid.innerHTML = `<button id="back-btn" class="back-btn">⬅️ Kembali</button>`;
     document.getElementById("back-btn").addEventListener("click", () => renderMainSeries(region));
-
     const serie = mainSeries[region].find(s => s.name === serieName);
     serie.subs.forEach(sub => {
       const div = document.createElement("div");
@@ -76,31 +71,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔹 Daftar kartu dalam sub-seri
   function renderCardList(region, serieName, subSerie) {
-    grid.innerHTML = `
-      <button id="back-btn" class="back-btn">⬅️ Kembali</button>
-    `;
+    const ownedKey = `owned_${subSerie.replace(/\s+/g, "_")}`;
+    const ownedCards = JSON.parse(localStorage.getItem(ownedKey)) || {};
+
+    grid.innerHTML = `<button id="back-btn" class="back-btn">⬅️ Kembali</button>`;
     document.getElementById("back-btn").addEventListener("click", () => renderSubSeries(region, serieName));
 
-    // ⚠️ Nanti ini bisa diganti ambil data dari JSON / API
-    const dummyCards = [
-      { name: "Pikachu", image: "https://images.pokemontcg.io/base1/58.png", type: "Listrik" },
-      { name: "Charmander", image: "https://images.pokemontcg.io/base1/46.png", type: "Api" },
-      { name: "Squirtle", image: "https://images.pokemontcg.io/base1/63.png", type: "Air" }
-    ];
-
-    dummyCards.forEach(card => {
+    const cards = cardDatabase[subSerie] || [];
+    cards.forEach(card => {
       const div = document.createElement("div");
       div.className = "card";
+      const isOwned = ownedCards[card.id];
+
       div.innerHTML = `
-        <img src="${card.image}" alt="${card.name}">
-        <h3>${card.name}</h3>
-        <p>${card.type}</p>
+        <img src="${card.image}" alt="${card.name}" style="filter: ${isOwned ? "none" : "grayscale(100%)"}">
+        <h3>${card.id} - ${card.name}</h3>
+        <label>
+          <input type="checkbox" ${isOwned ? "checked" : ""}> Punya
+        </label>
       `;
+
+      const checkbox = div.querySelector("input");
+      const img = div.querySelector("img");
+
+      checkbox.addEventListener("change", () => {
+        ownedCards[card.id] = checkbox.checked;
+        img.style.filter = checkbox.checked ? "none" : "grayscale(100%)";
+        localStorage.setItem(ownedKey, JSON.stringify(ownedCards));
+      });
+
       grid.appendChild(div);
     });
   }
 
-  renderFlags(); // halaman awal
+  renderFlags();
 });
